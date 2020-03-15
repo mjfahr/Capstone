@@ -1,10 +1,12 @@
 from csv_creation import *
+import nltk
 
+# Uncomment when initially downloading packages
+# nltk.download('averaged_perceptron_tagger')
 
 file_name = "transformers"
 file_directory = "data/"
 output_directory = "csv/"
-
 
 # Opens text file
 file = open(file_directory + file_name + '.txt', "r", encoding="utf8")
@@ -62,9 +64,17 @@ text_tokens = word_tokenize(text)
 # Remove stop words
 stop_words = set(stopwords.words('english'))
 filtered_tokens = [w for w in text_tokens if not w in stop_words]
+filtered_tokens = [word for word in filtered_tokens if word.isalnum()]
+
 
 # Write CSV for (Index, Word, Frequency)
 write_document_word_statistics(filtered_tokens)
+
+# Write CSV for (Index, Word, Frequency)
+# Only writes top 10% of words based on frequency
+write_important_document_word_statistics(filtered_tokens)
+
+write_noun_document_word_statistics(filtered_tokens)
 
 
 

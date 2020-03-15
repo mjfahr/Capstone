@@ -2,6 +2,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 import pandas as pd
+import nltk
 
 output_directory = "csv/"
 
@@ -39,6 +40,7 @@ def write_section_statistics_csv(sections):
         # Remove stop words
         stop_words = set(stopwords.words('english'))
         filtered_tokens = [w for w in section_tokens if not w in stop_words]
+        filtered_tokens = [word for word in filtered_tokens if word.isalnum()]
 
         fdist = FreqDist(filtered_tokens)
 
@@ -73,3 +75,44 @@ def write_document_word_statistics(data):
 
     # Write Index, Word, and Frequency to a CSV
     df.to_csv(output_directory + "document_word_statistics.csv")
+
+
+# Write CSV for (Index, Word, Frequency)
+# Grabs top 10% of data
+def write_important_document_word_statistics(data):
+    # Frequency Distribution of filtered tokens
+    fdist = FreqDist(data)
+    df = pd.DataFrame.from_dict(fdist, orient="index")
+    df.columns = ['Frequency']
+    df = df.sort_values(by=['Frequency'], ascending=False)
+    df['Index'] = list(range(0, len(df)))
+    df['Word'] = df.index
+    df.set_index("Index", inplace=True)
+    df = df[['Word', 'Frequency']]
+
+    length = int(len(df) / 10)
+    data = df.iloc[:length]
+
+    # Write Index, Word, and Frequency to a CSV
+    data.to_csv(output_directory + "important_document_word_statistics.csv")
+
+def write_noun_document_word_statistics(data):
+    data = nltk.pos_tag(data)
+
+    nouns = [word for (word, pos) in data if pos == 'NN']
+
+    # Frequency Distribution of filtered tokens
+    fdist = FreqDist(nouns)
+    df = pd.DataFrame.from_dict(fdist, orient="index")
+    df.columns = ['Frequency']
+    df = df.sort_values(by=['Frequency'], ascending=False)
+    df['Index'] = list(range(0, len(df)))
+    df['Word'] = df.index
+    df.set_index("Index", inplace=True)
+    df = df[['Word', 'Frequency']]
+
+    length = int(len(df) / 10)
+    data = df.iloc[:length]
+
+    # Write Index, Word, and Frequency to a CSV
+    data.to_csv(output_directory + "noun_document_word_statistics.csv")
