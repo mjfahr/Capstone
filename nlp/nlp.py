@@ -74,7 +74,13 @@ write_document_word_statistics(filtered_tokens)
 # Only writes top 10% of words based on frequency
 write_important_document_word_statistics(filtered_tokens)
 
+# Write CSV for (Index, Word, Frequency)
 write_noun_document_word_statistics(filtered_tokens)
+
+# Write CSV for (Index, Section_Index, Total Word Frequency)
+write_section_total_word_count(filtered_sections)
+
+
 
 
 

@@ -96,6 +96,9 @@ def write_important_document_word_statistics(data):
     # Write Index, Word, and Frequency to a CSV
     data.to_csv(output_directory + "important_document_word_statistics.csv")
 
+
+# Write CSV for (Index, Word, Frequency)
+# Grabs nouns
 def write_noun_document_word_statistics(data):
     data = nltk.pos_tag(data)
 
@@ -116,3 +119,19 @@ def write_noun_document_word_statistics(data):
 
     # Write Index, Word, and Frequency to a CSV
     data.to_csv(output_directory + "noun_document_word_statistics.csv")
+
+
+# Write CSV for (Index, Word, Frequency)
+# Grabs nouns
+def write_section_total_word_count(sections):
+    index_count = 0
+    section_files = []
+    for i in range(0, len(sections)):
+        section = sections[i]
+        section_tokens = word_tokenize(section)
+        section_files.append((i, len(section_tokens)))
+
+    section_df = pd.DataFrame(section_files, columns=['Section_Index', 'Total_Word_Count'])
+    section_df.index.name = "Index"
+    # Write Index, Word, and Frequency to a CSV
+    section_df.to_csv(output_directory + "section_total_word_count.csv")
