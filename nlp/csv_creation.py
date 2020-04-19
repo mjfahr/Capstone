@@ -4,11 +4,11 @@ from nltk.probability import FreqDist
 import pandas as pd
 import nltk
 
-output_directory = "csv/"
+#output_directory = "csv/"
 
 
 # Write CSV for (Index, Section_Index, File_Name)
-def write_section_csv(data):
+def write_section_csv(data, output_directory):
     section_files = []
     for i in range(0, len(data)):
         s = data[i]
@@ -29,7 +29,7 @@ def write_section_csv(data):
 
 
 # Write CSV for (Index, Section_Index, Word, Frequency)
-def write_section_statistics_csv(sections):
+def write_section_statistics_csv(sections, output_directory):
     index_count = 0
     frames = []
     for i in range(0, len(sections)):
@@ -62,7 +62,7 @@ def write_section_statistics_csv(sections):
 
 
 # Write CSV for (Index, Word, Frequency)
-def write_document_word_statistics(data):
+def write_document_word_statistics(data, output_directory):
     # Frequency Distribution of filtered tokens
     fdist = FreqDist(data)
     df = pd.DataFrame.from_dict(fdist, orient="index")
@@ -79,7 +79,7 @@ def write_document_word_statistics(data):
 
 # Write CSV for (Index, Word, Frequency)
 # Grabs top 10% of data
-def write_important_document_word_statistics(data):
+def write_important_document_word_statistics(data, output_directory):
     # Frequency Distribution of filtered tokens
     fdist = FreqDist(data)
     df = pd.DataFrame.from_dict(fdist, orient="index")
@@ -99,7 +99,7 @@ def write_important_document_word_statistics(data):
 
 # Write CSV for (Index, Word, Frequency)
 # Grabs nouns
-def write_noun_document_word_statistics(data):
+def write_noun_document_word_statistics(data, output_directory):
     data = nltk.pos_tag(data)
 
     nouns = [word for (word, pos) in data if pos == 'NN']
@@ -123,7 +123,7 @@ def write_noun_document_word_statistics(data):
 
 # Write CSV for (Index, Word, Frequency)
 # Grabs nouns
-def write_section_total_word_count(sections):
+def write_section_total_word_count(sections, output_directory):
     index_count = 0
     section_files = []
     for i in range(0, len(sections)):
