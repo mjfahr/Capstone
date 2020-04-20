@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from csv_gen import *
+from generic_graphs import *
 import os.path
 
 class Ui_MainWindow(object):
@@ -38,6 +39,43 @@ class Ui_MainWindow(object):
     def csvButton2_onclick(self, MainWindow):
         create_section_stat_csv(self.file_name, self.file_directory, self.output_directory)
         self.set_outputtext("section_word_statistics.csv created.")
+
+    def graphButton1_onclick(self, MainWindow):
+        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        important_word = QtWidgets.QInputDialog.getText(None, "Get Word", "Important Word:", QtWidgets.QLineEdit.Normal, "")
+        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+        graph = Graphs(fileName[0], user_input_graph_name[0])
+        frequency_per_section(graph, important_word)
+
+    def graphButton2_onclick(self, MainWindow):
+        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words:", QtWidgets.QLineEdit.Normal, "")
+        important_words = list(user_input[0].split(" "))
+        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+        graph = Graphs(fileName[0], user_input_graph_name[0])
+        frequency_comparison(graph, important_words)    
+
+    def graphButton3_onclick(self, Mainwindow):
+        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words:", QtWidgets.QLineEdit.Normal, "")
+        important_words = list(user_input[0].split(" "))
+        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+        graph = Graphs(fileName, user_input_graph_name[0])
+        multi_word_frequency(graph, important_words)
+    
+    def graphButton4_onclick(self, MainWindow):
+        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words:", QtWidgets.QLineEdit.Normal, "")
+        important_words = list(user_input[0].split(" "))
+        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+        graph = Graphs(fileName[0], user_input_graph_name[0])
+        multi_word_frequency_alternative(graph, important_words)  
+
+    def graphButton5_onclick(self, MainWindow):
+        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+        graph = Graphs(fileName[0], user_input_graph_name[0])
+        word_count_section(graph)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -133,30 +171,35 @@ class Ui_MainWindow(object):
         self.graphButton1 = QtWidgets.QPushButton(self.formLayoutWidget_2)
         self.graphButton1.setObjectName("graphButton1")
         self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.graphButton1)
+        self.graphButton1.clicked.connect(self.graphButton1_onclick)
         self.label_7 = QtWidgets.QLabel(self.formLayoutWidget_2)
         self.label_7.setObjectName("label_7")
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_7)
         self.graphButton2 = QtWidgets.QPushButton(self.formLayoutWidget_2)
         self.graphButton2.setObjectName("graphButton2")
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.graphButton2)
+        self.graphButton2.clicked.connect(self.graphButton2_onclick)
         self.label_8 = QtWidgets.QLabel(self.formLayoutWidget_2)
         self.label_8.setObjectName("label_8")
         self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_8)
         self.graphButton3 = QtWidgets.QPushButton(self.formLayoutWidget_2)
         self.graphButton3.setObjectName("graphButton3")
         self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.graphButton3)
+        self.graphButton3.clicked.connect(self.graphButton3_onclick)
         self.label_10 = QtWidgets.QLabel(self.formLayoutWidget_2)
         self.label_10.setObjectName("label_10")
         self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_10)
         self.graphButton4 = QtWidgets.QPushButton(self.formLayoutWidget_2)
         self.graphButton4.setObjectName("graphButton4")
         self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.graphButton4)
+        self.graphButton4.clicked.connect(self.graphButton4_onclick)
         self.label_11 = QtWidgets.QLabel(self.formLayoutWidget_2)
         self.label_11.setObjectName("label_11")
         self.formLayout_2.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_11)
         self.graphButton5 = QtWidgets.QPushButton(self.formLayoutWidget_2)
         self.graphButton5.setObjectName("graphButton5")
         self.formLayout_2.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.graphButton5)
+        self.graphButton5.clicked.connect(self.graphButton5_onclick)
         self.scrollArea = QtWidgets.QScrollArea(self.groupBox)
         self.scrollArea.setGeometry(QtCore.QRect(9, 20, 261, 151))
         self.scrollArea.setWidgetResizable(True)
