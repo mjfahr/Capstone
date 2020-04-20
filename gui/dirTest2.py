@@ -60,7 +60,7 @@ class Ui_MainWindow(object):
         user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words:", QtWidgets.QLineEdit.Normal, "")
         important_words = list(user_input[0].split(" "))
         user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
-        graph = Graphs(fileName, user_input_graph_name[0])
+        graph = Graphs(fileName[0], user_input_graph_name[0])
         multi_word_frequency(graph, important_words)
     
     def graphButton4_onclick(self, MainWindow):

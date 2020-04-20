@@ -40,7 +40,7 @@ def multi_word_frequency_alternative(graphs_object, important_word_list):
     plt.show()
 
 def multi_word_frequency(graphs_object, important_word_list):
-    data = pd.read_csv(r"C:\Users\Pao\Desktop\gui\section_word_statistics.csv")
+    data = pd.read_csv(graphs_object.csv_file_path)
     data.dropna(inplace = True)
     data = data[data["Word"].isin(important_word_list)]
     test = dict(tuple(data.groupby('Word')))
