@@ -40,6 +40,14 @@ class Ui_MainWindow(object):
         create_section_stat_csv(self.file_name, self.file_directory, self.output_directory)
         self.set_outputtext("section_word_statistics.csv created.")
 
+    def csvButton3_onclick(self, MainWindow):
+        create_document_word_stat_csv(self.file_name, self.file_directory, self.output_directory)
+        self.set_outputtext("document_word_statistics.csv created.")
+
+    def csvButton4_onclick(self, MainWindow):
+        create_section_word_count_csv(self.file_name, self.file_directory, self.output_directory)
+        self.set_outputtext("section_total_word_count.csv created.")
+
     def graphButton1_onclick(self, MainWindow):
         fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
         important_word = QtWidgets.QInputDialog.getText(None, "Get Word", "Important Word:", QtWidgets.QLineEdit.Normal, "")
@@ -146,12 +154,14 @@ class Ui_MainWindow(object):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_5)
         self.csvButton3 = QtWidgets.QPushButton(self.formLayoutWidget)
         self.csvButton3.setObjectName("csvButton3")
+        self.csvButton3.clicked.connect(self.csvButton3_onclick)
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.csvButton3)
         self.label_6 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_6.setObjectName("label_6")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_6)
         self.csvButton4 = QtWidgets.QPushButton(self.formLayoutWidget)
         self.csvButton4.setObjectName("csvButton4")
+        self.csvButton4.clicked.connect(self.csvButton4_onclick)
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.csvButton4)
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setGeometry(QtCore.QRect(330, 10, 281, 351))
@@ -257,7 +267,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "CSV Path:"))
         self.dataButton.setText(_translate("MainWindow", "Select"))
         self.groupBox_4.setTitle(_translate("MainWindow", "Generate CSVs"))
-        self.label_3.setText(_translate("MainWindow", "Seciton files"))
+        self.label_3.setText(_translate("MainWindow", "Section files"))
         self.csvButton1.setText(_translate("MainWindow", "Generate"))
         self.label_4.setText(_translate("MainWindow", "Section word stats."))
         self.csvButton2.setText(_translate("MainWindow", "Generate"))
