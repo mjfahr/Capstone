@@ -33,20 +33,52 @@ class Ui_MainWindow(object):
         self.CSVPath.setText(self.output_directory)
 
     def csvButton1_onclick(self,MainWindow):
-        create_section_csv(self.file_name, self.file_directory, self.output_directory)
-        self.set_outputtext("section_files.csv created.")
+        try:
+            create_section_csv(self.file_name, self.file_directory, self.output_directory)
+            self.set_outputtext("section_files.csv created.")
+        except:
+            errMsg = QtWidgets.QMessageBox()
+            errMsg.setIcon(QtWidgets.QMessageBox.Critical)
+            errMsg.setText("Cannot create CSV")
+            errMsg.setInformativeText('Check if the CSV path and Data Path are correct')
+            errMsg.setWindowTitle("Error")
+            errMsg.exec_()
 
     def csvButton2_onclick(self, MainWindow):
-        create_section_stat_csv(self.file_name, self.file_directory, self.output_directory)
-        self.set_outputtext("section_word_statistics.csv created.")
+        try:
+            create_section_stat_csv(self.file_name, self.file_directory, self.output_directory)
+            self.set_outputtext("section_word_statistics.csv created.")
+        except:
+            errMsg = QtWidgets.QMessageBox()
+            errMsg.setIcon(QtWidgets.QMessageBox.Critical)
+            errMsg.setText("Cannot create CSV")
+            errMsg.setInformativeText('Check if the CSV path and Data Path are correct')
+            errMsg.setWindowTitle("Error")
+            errMsg.exec_()
 
     def csvButton3_onclick(self, MainWindow):
-        create_document_word_stat_csv(self.file_name, self.file_directory, self.output_directory)
-        self.set_outputtext("document_word_statistics.csv created.")
+        try:
+            create_document_word_stat_csv(self.file_name, self.file_directory, self.output_directory)
+            self.set_outputtext("document_word_statistics.csv created.")
+        except:
+            errMsg = QtWidgets.QMessageBox()
+            errMsg.setIcon(QtWidgets.QMessageBox.Critical)
+            errMsg.setText("Cannot create CSV")
+            errMsg.setInformativeText('Check if the CSV path and Data Path are correct')
+            errMsg.setWindowTitle("Error")
+            errMsg.exec_()
 
     def csvButton4_onclick(self, MainWindow):
-        create_section_word_count_csv(self.file_name, self.file_directory, self.output_directory)
-        self.set_outputtext("section_total_word_count.csv created.")
+        try:
+            create_section_word_count_csv(self.file_name, self.file_directory, self.output_directory)
+            self.set_outputtext("section_total_word_count.csv created.")
+        except:
+            errMsg = QtWidgets.QMessageBox()
+            errMsg.setIcon(QtWidgets.QMessageBox.Critical)
+            errMsg.setText("Cannot create CSV")
+            errMsg.setInformativeText('Check if the CSV path and Data Path are correct')
+            errMsg.setWindowTitle("Error")
+            errMsg.exec_()
 
     def graphButton1_onclick(self, MainWindow):
         #fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
