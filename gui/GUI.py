@@ -49,41 +49,66 @@ class Ui_MainWindow(object):
         self.set_outputtext("section_total_word_count.csv created.")
 
     def graphButton1_onclick(self, MainWindow):
-        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
-        important_word = QtWidgets.QInputDialog.getText(None, "Get Word", "Important Word:", QtWidgets.QLineEdit.Normal, "")
-        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
-        graph = Graphs(fileName[0], user_input_graph_name[0])
-        frequency_per_section(graph, important_word)
+        #fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        fileName = self.output_directory + "section_word_statistics.csv"
+        if os.path.isfile(fileName):
+            important_word = QtWidgets.QInputDialog.getText(None, "Get Word", "Important Word:", QtWidgets.QLineEdit.Normal, "")
+            user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+            graph = Graphs(fileName, user_input_graph_name[0])
+            frequency_per_section(graph, important_word)
+        else:
+            self.set_outputtext("Invalid CSV directory or 'section_word_statistics.csv' has not been generated.")
+            return
 
     def graphButton2_onclick(self, MainWindow):
-        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
-        user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words:", QtWidgets.QLineEdit.Normal, "")
-        important_words = list(user_input[0].split(" "))
-        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
-        graph = Graphs(fileName[0], user_input_graph_name[0])
-        frequency_comparison(graph, important_words)    
+        #fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        fileName = self.output_directory + "document_word_statistics.csv"
+        if os.path.isfile(fileName):
+            user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words: \n Enter multiple words seperated by spaces.", QtWidgets.QLineEdit.Normal, "")
+            important_words = list(user_input[0].split(" "))
+            user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+            graph = Graphs(fileName, user_input_graph_name[0])
+            frequency_comparison(graph, important_words)
+        else:
+            self.set_outputtext("Invalid CSV directory or 'section_word_statistics.csv' has not been generated.")
+            return
 
     def graphButton3_onclick(self, Mainwindow):
-        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
-        user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words:", QtWidgets.QLineEdit.Normal, "")
-        important_words = list(user_input[0].split(" "))
-        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
-        graph = Graphs(fileName[0], user_input_graph_name[0])
-        multi_word_frequency(graph, important_words)
+        #fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        fileName = self.output_directory + "section_word_statistics.csv"
+        if os.path.isfile(fileName):
+            user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words: \n Enter multiple words seperated by spaces.", QtWidgets.QLineEdit.Normal, "")
+            important_words = list(user_input[0].split(" "))
+            user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+            graph = Graphs(fileName, user_input_graph_name[0])
+            multi_word_frequency(graph, important_words)
+        else:
+            self.set_outputtext("Invalid CSV directory or 'section_word_statistics.csv' has not been generated.")
+            return
     
     def graphButton4_onclick(self, MainWindow):
-        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
-        user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words:", QtWidgets.QLineEdit.Normal, "")
-        important_words = list(user_input[0].split(" "))
-        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
-        graph = Graphs(fileName[0], user_input_graph_name[0])
-        multi_word_frequency_alternative(graph, important_words)  
+        #fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        fileName = self.output_directory + "section_word_statistics.csv"
+        if os.path.isfile(fileName):
+            user_input = QtWidgets.QInputDialog.getText(None, "Get Important Words", "Important Words: \n Enter multiple words seperated by spaces.", QtWidgets.QLineEdit.Normal, "")
+            important_words = list(user_input[0].split(" "))
+            user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+            graph = Graphs(fileName, user_input_graph_name[0])
+            multi_word_frequency_alternative(graph, important_words)
+        else:
+            self.set_outputtext("Invalid CSV directory or 'section_word_statistics.csv' has not been generated.")
+            return
 
     def graphButton5_onclick(self, MainWindow):
-        fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
-        user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
-        graph = Graphs(fileName[0], user_input_graph_name[0])
-        word_count_section(graph)
+        #fileName = QtWidgets.QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "CSV Files (*.csv)")
+        fileName = self.output_directory + "section_total_word_count.csv"
+        if os.path.isfile(fileName):
+            user_input_graph_name = QtWidgets.QInputDialog.getText(None, "Get Graph Name", "Graph Name:", QtWidgets.QLineEdit.Normal, "")
+            graph = Graphs(fileName, user_input_graph_name[0])
+            word_count_section(graph)
+        else:
+            self.set_outputtext("Invalid CSV directory or 'section_word_statistics.csv' has not been generated.")
+            return
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
