@@ -8,9 +8,12 @@ pandas
 Matplotlib
 PyQt5
 
-These can be installed using the command pip install [library name]
+These can be installed using the command:
+
+pip install [library name]
 
 Once the required libraries are installed, the project can be run by navigating to the GUI folder and running the following command:
+
 python GUI.py
 
 Further instructions are presented in the GUI itself.
